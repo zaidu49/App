@@ -1,0 +1,11 @@
+<ng-container *ngIf="(testDetail$ | async) as testDetail; else loading">
+
+  <h1>{{ testDetail.title }}</h1>
+  <div>{{ testDetail.body }}</div>
+  <ul>
+    <li>{{ testDetail.creator }}</li>
+    <!--<li>{{ testDetail.dt | date: "dd.MM.y" }}</li>-->
+  </ul>
+
+</ng-container>
+<ng-template #loading>Loading…</ng-template>

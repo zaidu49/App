@@ -1,0 +1,27 @@
+<h1>Test</h1>
+
+<p *ngIf="!(tests$ | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New post</a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(tests$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Creator</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let test of (tests$ | async)">
+      <td>{{ test.testId }}</td>
+      <td><a [routerLink]="['/test/', test.testId]">{{ test.title }}</a></td>
+      <td>{{ test.creator }}</td>
+      <td><a [routerLink]="['/test/edit/', test.testId]" class="btn btn-primary btn-sm float-right">Edit</a></td>
+      <td><a [routerLink]="" (click)="delete(test.testId)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+    </tr>
+  </tbody>
+</table>
