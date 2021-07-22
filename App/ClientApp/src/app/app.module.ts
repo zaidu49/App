@@ -16,6 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { TestDetailComponent } from './test-detail/test-detail.component';
 import { AddEditTestComponent } from './add-edit-test/add-edit-test.component';
 import { QuestionComponent } from './quiz/question/question.component';
+import { QuestionService } from './providers/question.service';
+import { QuestionListComponent } from './quiz/question-list/question-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { QuestionComponent } from './quiz/question/question.component';
     TestComponent,
     TestDetailComponent,
     AddEditTestComponent,
-    QuestionComponent
+    QuestionComponent,
+    QuestionListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,7 +43,7 @@ import { QuestionComponent } from './quiz/question/question.component';
     
     //])
   ],
-  providers: [TestService],
+  providers: [TestService, QuestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

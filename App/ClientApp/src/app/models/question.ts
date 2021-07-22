@@ -1,4 +1,4 @@
 export class Question {
   questionId?: number;
-  text: string;
+  questionText: string;
 }

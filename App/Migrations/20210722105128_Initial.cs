@@ -2,7 +2,7 @@
 
 namespace App.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace App.Migrations
                 {
                     QuestionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,14 +35,22 @@ namespace App.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Tests",
-                columns: new[] { "TestId", "Body", "Creator", "Title" },
-                values: new object[] { 2, "Male", "IT", "z1" });
+                table: "Questions",
+                columns: new[] { "QuestionId", "QuestionText" },
+                values: new object[,]
+                {
+                    { 1, "question1" },
+                    { 2, "question2" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Tests",
                 columns: new[] { "TestId", "Body", "Creator", "Title" },
-                values: new object[] { 3, "Male", "IT", "z2" });
+                values: new object[,]
+                {
+                    { 2, "Male", "IT", "z1" },
+                    { 3, "Male", "IT", "z2" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

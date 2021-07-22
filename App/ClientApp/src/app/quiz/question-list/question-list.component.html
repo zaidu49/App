@@ -1,0 +1,27 @@
+<div class="d-flex">
+  <button type="button" class="btn btn-primary" (click)="clickAddQuestion()">Add Question</button>
+</div>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Question</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of (questionData | async)">
+      <td>{{question.questionId}}</td>
+      <td>{{question.questionText}}</td>
+      <!-- <td>
+      <button class="btn btn-info" (click)="onEditAddress(address)" data-bs-toggle="modal" data-bs-target="#addAddressModal">Edit</button>
+      <button class="btn btn-danger" (click)="deleteAddress(address)">Delete</button>
+
+  </td>-->
+      <td>
+        <a [routerLink]="['/question/edit/', question.questionId]" class="btn btn-primary btn-sm float-right">Edit</a>
+        <a [routerLink]="" (click)="delete(test.testId)" class="btn btn-danger btn-sm float-right">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

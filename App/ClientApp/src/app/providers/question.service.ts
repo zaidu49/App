@@ -24,8 +24,41 @@ export class QuestionService {
     this.myApiUrl = 'api/Question/';
   }
 
-  saveQuestion(test): Observable<Question> {
-    return this.http.post<Question>(this.myAppUrl + this.myApiUrl, JSON.stringify(test), this.httpOptions)
+  getAllQuestions(): Observable<Question[]> {
+    return this.http.get<Question[]>(this.myAppUrl + this.myApiUrl)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandler)
+      );
+  }
+
+  getQuestion(questionId: number): Observable<Question> {
+    return this.http.get<Question>(this.myAppUrl + this.myApiUrl + questionId)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandler)
+      );
+  }
+
+  saveQuestion(question): Observable<Question> {
+    return this.http.post<Question>(this.myAppUrl + this.myApiUrl, JSON.stringify(question), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandler)
+      );
+  }
+
+  updateQuestion(questionId: number, question): Observable<Question> {
+    alert("11");
+    return this.http.put<Question>(this.myAppUrl + this.myApiUrl + questionId, JSON.stringify(question), this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandler)
+      );
+  }
+
+  deleteTest(questionId: number): Observable<Question> {
+    return this.http.delete<Question>(this.myAppUrl + this.myApiUrl + questionId)
       .pipe(
         retry(1),
         catchError(this.errorHandler)

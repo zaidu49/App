@@ -14,12 +14,12 @@ namespace App.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionsController : ControllerBase
+    public class QuestionController : ControllerBase
     {
         private readonly AppDataContext _context;
         private readonly IDataRepository<Question> _repo;
 
-        public QuestionsController(AppDataContext context, IDataRepository<Question> repo)
+        public QuestionController(AppDataContext context, IDataRepository<Question> repo)
         {
             _context = context;
             _repo = repo;

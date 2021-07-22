@@ -1,4 +1,4 @@
-<h1>{{title}}</h1>
+<!--<h1>{{title}}</h1>
 <h3>Question</h3>
 <hr />
 <form [formGroup]="questionForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
@@ -13,104 +13,55 @@
     </span>
   </div>
 
-  <!--<div class="form-group row">
-    <label class="control-label col-md-12" for="Gender">Gender</label>
-    <div class="col-md-4">
-      <select class="form-control" data-val="true" formControlName="gender">
-        <option value="">-- Select Gender --</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-    </div>
-    <span class="text-danger" *ngIf="gender.invalid && formDir.submitted">
-      Gender is required
-    </span>
-  </div>-->
-  <!--<div class="form-group row">
-    <label class="control-label col-md-12" for="Department">Department</label>
-    <div class="col-md-4">
-      <input class="form-control" type="text" formControlName="department">
-    </div>
-    <span class="text-danger" *ngIf="department.invalid && formDir.submitted">
-      Department is required
-    </span>
-  </div>-->
-  <!--<div class="form-group row">
-    <label class="control-label col-md-12" for="City">City</label>
-    <div class="col-md-4">
-      <select class="form-control" data-val="true" formControlName="city">
-        <option value="">--Select City--</option>
-        <option *ngFor="let city of cityList"
-                value={{city.cityName}}>
-          {{city.cityName}}
-        </option>
-      </select>
-    </div>
-    <span class="text-danger" *ngIf="city.invalid && formDir.submitted">
-      City is required
-    </span>
-  </div>-->
+
   <div class="form-group">
     <button type="submit" class="btn btn-default">Save</button>
     <button class="btn" (click)="cancel()">Cancel</button>
   </div>
-</form>
-
-
-<!--<h1>{{title}}</h1>
-<h3>Question</h3>
-<hr />
-<form [formGroup]="questionForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
-
-  <div class="form-group row">
-    <label class=" control-label col-md-12">Name</label>
-    <div class="col-md-4">
-      <input class="form-control" type="text" formControlName="name">
-    </div>
-    <span class="text-danger" *ngIf="name.invalid && formDir.submitted">
-      Name is required.
-    </span>
-  </div>
-
-  <div class="form-group row">
-    <label class="control-label col-md-12" for="Gender">Gender</label>
-    <div class="col-md-4">
-      <select class="form-control" data-val="true" formControlName="gender">
-        <option value="">-- Select Gender --</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-    </div>
-    <span class="text-danger" *ngIf="gender.invalid && formDir.submitted">
-      Gender is required
-    </span>
-  </div>
-  <div class="form-group row">
-    <label class="control-label col-md-12" for="Department">Department</label>
-    <div class="col-md-4">
-      <input class="form-control" type="text" formControlName="department">
-    </div>
-    <span class="text-danger" *ngIf="department.invalid && formDir.submitted">
-      Department is required
-    </span>
-  </div>-->
-  <!--<div class="form-group row">
-    <label class="control-label col-md-12" for="City">City</label>
-    <div class="col-md-4">
-      <select class="form-control" data-val="true" formControlName="city">
-        <option value="">--Select City--</option>
-        <option *ngFor="let city of cityList"
-                value={{city.cityName}}>
-          {{city.cityName}}
-        </option>
-      </select>
-    </div>
-    <span class="text-danger" *ngIf="city.invalid && formDir.submitted">
-      City is required
-    </span>
-  </div>-->
-  <!--<div class="form-group">
-    <button type="submit" class="btn btn-default">Save</button>
-    <button class="btn" (click)="cancel()">Cancel</button>
-  </div>
 </form>-->
+
+
+<div class="card">
+  <h4 class="card-header">Register</h4>
+  <div class="card-body">
+    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" #formDir="ngForm" novalidate>
+
+    
+      <div class="form-group">
+        <label for="questionText">Question</label>
+        <input type="text" formControlName="questionText" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.questionText.errors }" />
+        <div *ngIf="submitted && f.questionText.errors" class="invalid-feedback">
+          <div *ngIf="f.questionText.errors.required">Question Text is required</div>
+        </div>
+      </div>
+
+      <!--<div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+      <div *ngIf="f.username.errors.required">Username is required</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div *ngIf="f.password.errors.required">Password is required</div>
+      <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+    </div>
+  </div>-->
+      <!--<div class="form-group">
+    <button [disabled]="loading" class="btn btn-primary">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Register
+    </button>
+  </div>-->
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-secondary ml-1" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -32,6 +32,11 @@ namespace App.Data
                 new Test { TestId = 2, Title = "z1", Body = "Male", Creator = "IT" },
                 new Test { TestId = 3,  Title = "z2", Body = "Male", Creator = "IT" }
                 );
+
+            modelBuilder.Entity<Question>().HasData(
+                new Question { QuestionId = 1, QuestionText = "question1" },
+                new Question { QuestionId = 2, QuestionText = "question2" }
+                );
         }
 
     }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { Question } from '../../models/question';
+import { QuestionService } from '../../providers/question.service';
 
 @Component({
   selector: 'app-question',
@@ -10,68 +13,91 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class QuestionComponent implements OnInit {
 
   questionForm: FormGroup;
-  title: string = "Add";
+  title: string;
+  question: Question = new Question();
   questionId: number;
+  questionText: string;
   errorMessage: any;
-  //cityList: Array<any> = [];
+  submitted = false;
+  actionType: string;
+  existingQuestion: Question;
 
-  constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute, private _router: Router)
+  constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute, private _router: Router, private questionService: QuestionService)
   {
+    this.actionType = 'Add';
     if (this._avRoute.snapshot.params["id"]) {
       this.questionId = this._avRoute.snapshot.params["id"];
     }
 
     this.questionForm = this._fb.group({
-      employeeId: 0,
-      name: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      department: ['', [Validators.required]],
-      //city: ['', [Validators.required]]
+      questionId: 0,
+      questionText: ['', [Validators.required]],
     })
   }
 
   ngOnInit() {
 
-    //this._employeeService.getCityList().subscribe(
-    //  data => this.cityList = data
-    //)
+    if (this.questionId > 0) {
+      this.actionType = 'Edit';
+      this.questionService.getQuestion(this.questionId)
+        .subscribe(data => (
+          this.existingQuestion = data,
+          //this.questionForm.controls['questionText'].setValue(data.questionText),
+          //this.questionForm.controls[this.questionText].setValue(data.questionText),
+          this.questionForm.controls['questionText'].setValue(data.questionText)
+        ));
+    }
 
-    //if (this.employeeId > 0) {
-    //  this.title = "Edit";
-    //  this._employeeService.getEmployeeById(this.employeeId)
-    //    .subscribe(resp => this.employeeForm.setValue(resp)
-    //      , error => this.errorMessage = error);
-    //}
+    this.questionForm = this._fb.group({
+      questionText: ['', Validators.required]
+    });
+    
   }
 
-  save() {
 
-    console.log("It's working");
-    //if (!this.employeeForm.valid) {
-    //  return;
-    //}
+  onSubmit() {
 
-    //if (this.title == "Create") {
-    //  this._employeeService.saveEmployee(this.employeeForm.value)
-    //    .subscribe((data) => {
-    //      this._router.navigate(['/employee']);
-    //    }, error => this.errorMessage = error)
-    //}
-    //else if (this.title == "Edit") {
-    //  this._employeeService.updateEmployee(this.employeeForm.value)
-    //    .subscribe((data) => {
-    //      this._router.navigate(['/employee']);
-    //    }, error => this.errorMessage = error)
-    //}
+
+    this.submitted = true;
+    this.question.questionText = this.questionForm.value.questionText;
+
+    if (this.questionForm.invalid) {
+      return;
+    }
+    if (this.actionType === 'Add')
+    {
+      this.questionService.saveQuestion(this.questionForm.value)
+        .pipe(first())
+        .subscribe({
+          next: () => {
+            alert('Question added');
+            //this.loading = false;
+            // this.router.navigate(['/login']);
+          },
+          error: (error: any) => {
+            alert("Error!!!!");
+            //this.loading = false;
+          }
+        });
+    }
+
+    if (this.actionType === 'Edit') {
+
+      this.question.questionId = this.existingQuestion.questionId;
+      this.questionService.updateQuestion(this.questionId, this.question)
+        .subscribe((data) => {
+          this._router.navigate([this._router.url]);
+        });
+    }
+
   }
 
   cancel() {
     this._router.navigate(['/']);
   }
 
-  get name() { return this.questionForm.get('name'); }
-  get gender() { return this.questionForm.get('gender'); }
-  get department() { return this.questionForm.get('department'); }
-  //get city() { return this.questionForm.get('city'); }
+  get f() {
+    return this.questionForm.controls;
+  }
 
 }

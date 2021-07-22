@@ -12,7 +12,7 @@ namespace App.Models
 		public int QuestionId { get; set; }
 
 		[Required]
-		public string Text { get; set; }
+		public string QuestionText { get; set; }
 
 	}
 }
