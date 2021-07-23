@@ -106,6 +106,10 @@ namespace App.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuestion([FromRoute] int id, [FromBody] Question question)
         {
+
+            // to check or ge single question exist
+            // var question = await _context.Questions.SingleOrDefaultAsync(q => q.ID == id);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
