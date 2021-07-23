@@ -34,8 +34,8 @@ namespace App.Data
                 );
 
             modelBuilder.Entity<Question>().HasData(
-                new Question { QuestionId = 1, QuestionText = "question1" },
-                new Question { QuestionId = 2, QuestionText = "question2" }
+                new Question { QuestionId = 1, QuestionText = "question1", CorrectAnswer = "Correct answer", Answer1 = "answer 1", Answer2 = "answer 2", Answer3 = "answer 3" },
+                new Question { QuestionId = 2, QuestionText = "question2", CorrectAnswer = "Correct answer", Answer1 = "answer 1", Answer2 = "answer 2", Answer3 = "answer 3" }
                 );
         }
 

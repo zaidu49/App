@@ -44,12 +44,20 @@ export class QuestionComponent implements OnInit {
           this.existingQuestion = data,
           //this.questionForm.controls['questionText'].setValue(data.questionText),
           //this.questionForm.controls[this.questionText].setValue(data.questionText),
-          this.questionForm.controls['questionText'].setValue(data.questionText)
+          this.questionForm.controls['questionText'].setValue(data.questionText),
+          this.questionForm.controls['correctAnswer'].setValue(data.correctAnswer),
+          this.questionForm.controls['answer1'].setValue(data.answer1),
+          this.questionForm.controls['answer2'].setValue(data.answer2),
+          this.questionForm.controls['answer3'].setValue(data.answer3)
         ));
     }
 
     this.questionForm = this._fb.group({
-      questionText: ['', Validators.required]
+      questionText: ['', Validators.required],
+      correctAnswer: ['', Validators.required],
+      answer1: ['', Validators.required],
+      answer2: ['', Validators.required],
+      answer3: ['', Validators.required]
     });
     
   }
@@ -60,6 +68,10 @@ export class QuestionComponent implements OnInit {
 
     this.submitted = true;
     this.question.questionText = this.questionForm.value.questionText;
+    this.question.correctAnswer = this.questionForm.value.correctAnswer;
+    this.question.answer1 = this.questionForm.value.answer1;
+    this.question.answer2 = this.questionForm.value.answer2;
+    this.question.answer3 = this.questionForm.value.answer3;
 
     if (this.questionForm.invalid) {
       return;
@@ -72,7 +84,7 @@ export class QuestionComponent implements OnInit {
           next: () => {
             alert('Question added');
             //this.loading = false;
-            // this.router.navigate(['/login']);
+            this._router.navigate(['/question-list']);
           },
           error: (error: any) => {
             alert("Error!!!!");
@@ -86,14 +98,15 @@ export class QuestionComponent implements OnInit {
       this.question.questionId = this.existingQuestion.questionId;
       this.questionService.updateQuestion(this.questionId, this.question)
         .subscribe((data) => {
-          this._router.navigate([this._router.url]);
+          this._router.navigate(['/question-list']);
+          //this._router.navigate([this._router.url]);
         });
     }
 
   }
 
   cancel() {
-    this._router.navigate(['/']);
+    this._router.navigate(['/question-list']);
   }
 
   get f() {

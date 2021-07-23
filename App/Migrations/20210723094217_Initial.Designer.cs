@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20210722105128_Initial")]
+    [Migration("20210723094217_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,22 @@ namespace App.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Answer1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Answer2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Answer3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("QuestionText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -39,11 +55,19 @@ namespace App.Migrations
                         new
                         {
                             QuestionId = 1,
+                            Answer1 = "answer 1",
+                            Answer2 = "answer 2",
+                            Answer3 = "answer 3",
+                            CorrectAnswer = "Correct answer",
                             QuestionText = "question1"
                         },
                         new
                         {
                             QuestionId = 2,
+                            Answer1 = "answer 1",
+                            Answer2 = "answer 2",
+                            Answer3 = "answer 3",
+                            CorrectAnswer = "Correct answer",
                             QuestionText = "question2"
                         });
                 });

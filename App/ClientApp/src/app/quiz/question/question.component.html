@@ -26,12 +26,44 @@
   <div class="card-body">
     <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" #formDir="ngForm" novalidate>
 
-    
+
       <div class="form-group">
         <label for="questionText">Question</label>
         <input type="text" formControlName="questionText" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.questionText.errors }" />
         <div *ngIf="submitted && f.questionText.errors" class="invalid-feedback">
           <div *ngIf="f.questionText.errors.required">Question Text is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="correctAnswer">Correct Answer</label>
+        <input type="text" formControlName="correctAnswer" class="form-control" placeholder="Correct Answer" [ngClass]="{ 'is-invalid': submitted && f.correctAnswer.errors }" />
+        <div *ngIf="submitted && f.correctAnswer.errors" class="invalid-feedback">
+          <div *ngIf="f.correctAnswer.errors.required">Correct Answer is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="answer1">Answer 1</label>
+        <input type="text" formControlName="answer1" class="form-control" placeholder="Wrong Answer 1" [ngClass]="{ 'is-invalid': submitted && f.answer1.errors }" />
+        <div *ngIf="submitted && f.answer1.errors" class="invalid-feedback">
+          <div *ngIf="f.answer1.errors.required">Answer 1 is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="answer2">Answer 2</label>
+        <input type="text" formControlName="answer2" class="form-control" placeholder="Wrong Answer 2" [ngClass]="{ 'is-invalid': submitted && f.answer2.errors }" />
+        <div *ngIf="submitted && f.answer2.errors" class="invalid-feedback">
+          <div *ngIf="f.answer2.errors.required">Answer 2 is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="answer3">Answer 3</label>
+        <input type="text" formControlName="answer3" class="form-control" placeholder="Wrong Answer 3" [ngClass]="{ 'is-invalid': submitted && f.answer3.errors }" />
+        <div *ngIf="submitted && f.answer3.errors" class="invalid-feedback">
+          <div *ngIf="f.answer3.errors.required">Answer 3 is required</div>
         </div>
       </div>
 

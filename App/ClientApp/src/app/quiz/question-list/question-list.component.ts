@@ -27,6 +27,15 @@ export class QuestionListComponent implements OnInit {
       //})
   }
 
+  delete(questionId) {
+    const ans = confirm('Do you want to delete question with id: ' + questionId);
+    if (ans) {
+      this.questionService.deleteTest(questionId).subscribe((data) => {
+        this.getAllQuestions();
+      });
+    }
+
+  }
   clickAddQuestion() {
     this.router.navigate(['/question']);
   }

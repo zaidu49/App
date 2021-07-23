@@ -19,6 +19,10 @@ namespace App.Controllers
         private readonly AppDataContext _context;
         private readonly IDataRepository<Question> _repo;
 
+        //public QuestionController(AppDataContext context,)
+        //{
+        //    this._context = context;
+        //}
         public QuestionController(AppDataContext context, IDataRepository<Question> repo)
         {
             _context = context;

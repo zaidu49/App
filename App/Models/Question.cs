@@ -13,6 +13,14 @@ namespace App.Models
 
 		[Required]
 		public string QuestionText { get; set; }
+		[Required]
+		public string CorrectAnswer { get; set; }
+		[Required]
+		public string Answer1 { get; set; }
+		[Required]
+		public string Answer2 { get; set; }
+		[Required]
+		public string Answer3 { get; set; }
 
 	}
 }

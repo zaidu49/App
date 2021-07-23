@@ -6,6 +6,10 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Question</th>
+      <th scope="col">Correct Answer</th>
+      <th scope="col">Wrong Answer1</th>
+      <th scope="col">Wrong Answer2</th>
+      <th scope="col">Wrong Answer3</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -13,14 +17,18 @@
     <tr *ngFor="let question of (questionData | async)">
       <td>{{question.questionId}}</td>
       <td>{{question.questionText}}</td>
+      <td>{{question.correctAnswer}}</td>
+      <td>{{question.answer1}}</td>
+      <td>{{question.answer2}}</td>
+      <td>{{question.answer3}}</td>
       <!-- <td>
       <button class="btn btn-info" (click)="onEditAddress(address)" data-bs-toggle="modal" data-bs-target="#addAddressModal">Edit</button>
       <button class="btn btn-danger" (click)="deleteAddress(address)">Delete</button>
 
   </td>-->
       <td>
-        <a [routerLink]="['/question/edit/', question.questionId]" class="btn btn-primary btn-sm float-right">Edit</a>
-        <a [routerLink]="" (click)="delete(test.testId)" class="btn btn-danger btn-sm float-right">Delete</a>
+        <a [routerLink]="['/question/edit/', question.questionId]" class="btn btn-primary btn-sm">Edit</a>
+        <a [routerLink]="" (click)="delete(question.questionId)" class="btn btn-danger btn-sm ml-1">Delete</a>
       </td>
     </tr>
   </tbody>

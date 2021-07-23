@@ -12,7 +12,11 @@ namespace App.Migrations
                 {
                     QuestionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CorrectAnswer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Answer1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Answer2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Answer3 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,11 +40,11 @@ namespace App.Migrations
 
             migrationBuilder.InsertData(
                 table: "Questions",
-                columns: new[] { "QuestionId", "QuestionText" },
+                columns: new[] { "QuestionId", "Answer1", "Answer2", "Answer3", "CorrectAnswer", "QuestionText" },
                 values: new object[,]
                 {
-                    { 1, "question1" },
-                    { 2, "question2" }
+                    { 1, "answer 1", "answer 2", "answer 3", "Correct answer", "question1" },
+                    { 2, "answer 1", "answer 2", "answer 3", "Correct answer", "question2" }
                 });
 
             migrationBuilder.InsertData(
