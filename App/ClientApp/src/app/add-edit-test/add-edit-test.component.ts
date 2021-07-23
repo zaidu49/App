@@ -78,7 +78,9 @@ export class AddEditTestComponent implements OnInit {
       };
       this.testService.updateTest(test.testId, test)
         .subscribe((data) => {
-          this.router.navigate([this.router.url]);
+          this.router.navigate(['/test']);
+          //console.log("11" + this.router.url);
+          //this.router.navigate([this.router.url]);
         });
     }
   }

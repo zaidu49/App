@@ -49,7 +49,6 @@ export class QuestionService {
   }
 
   updateQuestion(questionId: number, question): Observable<Question> {
-    alert("11");
     return this.http.put<Question>(this.myAppUrl + this.myApiUrl + questionId, JSON.stringify(question), this.httpOptions)
       .pipe(
         retry(1),
