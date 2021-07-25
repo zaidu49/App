@@ -70,6 +70,22 @@ namespace App.Migrations
                         });
                 });
 
+            modelBuilder.Entity("App.Models.Quiz", b =>
+                {
+                    b.Property<int>("QuizId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("QuizTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("QuizId");
+
+                    b.ToTable("Quizzes");
+                });
+
             modelBuilder.Entity("App.Models.Test", b =>
                 {
                     b.Property<int>("TestId")

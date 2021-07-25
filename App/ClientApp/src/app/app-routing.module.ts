@@ -5,8 +5,10 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { HeroFormComponent } from './hero-form/hero-form.component';
 import { HomeComponent } from './home/home.component';
+import { AddEditQuizComponent } from './quiz/add-edit-quiz/add-edit-quiz.component';
 import { QuestionListComponent } from './quiz/question-list/question-list.component';
 import { QuestionComponent } from './quiz/question/question.component';
+import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
@@ -21,6 +23,9 @@ const routes: Routes = [
   { path: 'question', component: QuestionComponent },
   { path: 'question/edit/:id', component: QuestionComponent },
   { path: 'question-list', component: QuestionListComponent },
+  { path: 'add-edit-quiz', component: AddEditQuizComponent },
+  { path: 'quiz/edit/:id', component: AddEditQuizComponent },
+  { path: 'quiz-list', component: QuizListComponent },
 ];
 
 @NgModule({

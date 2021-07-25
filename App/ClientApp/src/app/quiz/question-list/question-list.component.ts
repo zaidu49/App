@@ -26,11 +26,10 @@ export class QuestionListComponent implements OnInit {
       //  this.questions = res;
       //})
   }
-
   delete(questionId) {
     const ans = confirm('Do you want to delete question with id: ' + questionId);
     if (ans) {
-      this.questionService.deleteTest(questionId).subscribe((data) => {
+      this.questionService.deleteQuestion(questionId).subscribe((data) => {
         this.getAllQuestions();
       });
     }

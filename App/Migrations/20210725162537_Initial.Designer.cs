@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20210723094217_Initial")]
+    [Migration("20210725162537_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,22 @@ namespace App.Migrations
                             CorrectAnswer = "Correct answer",
                             QuestionText = "question2"
                         });
+                });
+
+            modelBuilder.Entity("App.Models.Quiz", b =>
+                {
+                    b.Property<int>("QuizId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("QuizTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("QuizId");
+
+                    b.ToTable("Quizzes");
                 });
 
             modelBuilder.Entity("App.Models.Test", b =>

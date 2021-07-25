@@ -18,6 +18,9 @@ import { AddEditTestComponent } from './add-edit-test/add-edit-test.component';
 import { QuestionComponent } from './quiz/question/question.component';
 import { QuestionService } from './providers/question.service';
 import { QuestionListComponent } from './quiz/question-list/question-list.component';
+import { AddEditQuizComponent } from './quiz/add-edit-quiz/add-edit-quiz.component';
+import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
+import { QuizService } from './providers/quiz.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { QuestionListComponent } from './quiz/question-list/question-list.compon
     TestDetailComponent,
     AddEditTestComponent,
     QuestionComponent,
-    QuestionListComponent
+    QuestionListComponent,
+    AddEditQuizComponent,
+    QuizListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,7 +48,11 @@ import { QuestionListComponent } from './quiz/question-list/question-list.compon
     
     //])
   ],
-  providers: [TestService, QuestionService],
+  providers: [
+    TestService,
+    QuestionService,
+    QuizService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

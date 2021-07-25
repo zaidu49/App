@@ -22,11 +22,11 @@ export class QuestionComponent implements OnInit {
   actionType: string;
   existingQuestion: Question;
 
-  constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute, private _router: Router, private questionService: QuestionService)
+  constructor(private _fb: FormBuilder, private avRoute: ActivatedRoute, private router: Router, private questionService: QuestionService)
   {
     this.actionType = 'Add';
-    if (this._avRoute.snapshot.params["id"]) {
-      this.questionId = this._avRoute.snapshot.params["id"];
+    if (this.avRoute.snapshot.params["id"]) {
+      this.questionId = this.avRoute.snapshot.params["id"];
     }
 
     this.questionForm = this._fb.group({
@@ -84,7 +84,7 @@ export class QuestionComponent implements OnInit {
           next: () => {
             alert('Question added');
             //this.loading = false;
-            this._router.navigate(['/question-list']);
+            this.router.navigate(['/question-list']);
           },
           error: (error: any) => {
             alert("Error!!!!");
@@ -98,15 +98,15 @@ export class QuestionComponent implements OnInit {
       this.question.questionId = this.existingQuestion.questionId;
       this.questionService.updateQuestion(this.questionId, this.question)
         .subscribe((data) => {
-          this._router.navigate(['/question-list']);
-          //this._router.navigate([this._router.url]);
+          this.router.navigate(['/question-list']);
+          //this.router.navigate([this.router.url]);
         });
     }
 
   }
 
   cancel() {
-    this._router.navigate(['/question-list']);
+    this.router.navigate(['/question-list']);
   }
 
   get f() {

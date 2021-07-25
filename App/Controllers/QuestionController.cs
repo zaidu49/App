@@ -107,7 +107,7 @@ namespace App.Controllers
         public async Task<IActionResult> PutQuestion([FromRoute] int id, [FromBody] Question question)
         {
 
-            // to check or ge single question exist
+            // to check or ge single question exist no need to use as using entry.state
             // var question = await _context.Questions.SingleOrDefaultAsync(q => q.ID == id);
 
             if (!ModelState.IsValid)

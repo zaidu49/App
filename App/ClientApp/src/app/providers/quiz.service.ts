@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { Question } from '../models/question';
+import { Quiz } from '../models/quiz';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionService {
+export class QuizService {
 
   myAppUrl: string;
   myApiUrl: string;
@@ -18,46 +18,45 @@ export class QuestionService {
     })
   };
 
-  constructor(private http: HttpClient)
-  {
+  constructor(private http: HttpClient) {
     this.myAppUrl = environment.appUrl;
-    this.myApiUrl = 'api/Question/';
+    this.myApiUrl = 'api/Quiz/';
   }
 
-  getAllQuestions(): Observable<Question[]> {
-    return this.http.get<Question[]>(this.myAppUrl + this.myApiUrl)
+  getAllQuizzes(): Observable<Quiz[]> {
+    return this.http.get<Quiz[]>(this.myAppUrl + this.myApiUrl)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  getQuestion(questionId: number): Observable<Question> {
-    return this.http.get<Question>(this.myAppUrl + this.myApiUrl + questionId)
+  getQuiz(quizId: number): Observable<Quiz> {
+    return this.http.get<Quiz>(this.myAppUrl + this.myApiUrl + quizId)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  saveQuestion(question): Observable<Question> {
-    return this.http.post<Question>(this.myAppUrl + this.myApiUrl, JSON.stringify(question), this.httpOptions)
+  saveQuiz(quiz): Observable<Quiz> {
+    return this.http.post<Quiz>(this.myAppUrl + this.myApiUrl, JSON.stringify(quiz), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  updateQuestion(questionId: number, question): Observable<Question> {
-    return this.http.put<Question>(this.myAppUrl + this.myApiUrl + questionId, JSON.stringify(question), this.httpOptions)
+  updateQuiz(quizId: number, quiz): Observable<Quiz> {
+    return this.http.put<Quiz>(this.myAppUrl + this.myApiUrl + quizId, JSON.stringify(quiz), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  deleteQuestion(questionId: number): Observable<Question> {
-    return this.http.delete<Question>(this.myAppUrl + this.myApiUrl + questionId)
+  deleteQuiz(quizId: number): Observable<Quiz> {
+    return this.http.delete<Quiz>(this.myAppUrl + this.myApiUrl + quizId)
       .pipe(
         retry(1),
         catchError(this.errorHandler)

@@ -1,0 +1,21 @@
+
+<div class="card">
+  <h4 class="card-header">Quiz</h4>
+  <div class="card-body">
+    <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" #formDir="ngForm" novalidate>
+
+      <div class="form-group">
+        <label for="quizTitle">Quiz Title</label>
+        <input type="text" formControlName="quizTitle" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.quizTitle.errors }" />
+        <div *ngIf="submitted && f.quizTitle.errors" class="invalid-feedback">
+          <div *ngIf="f.quizTitle.errors.required">Quiz Title is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-secondary ml-1" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -31,11 +31,13 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\hero.ts" />
     <None Remove="ClientApp\src\app\models\question.ts" />
+    <None Remove="ClientApp\src\app\models\quiz.ts" />
     <None Remove="ClientApp\src\app\models\test.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\hero.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\quiz.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\question.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\test.ts" />
   </ItemGroup>

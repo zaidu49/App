@@ -1,0 +1,26 @@
+<div class="d-flex">
+  <button type="button" class="btn btn-primary" (click)="clickAddQuiz()">Add Quiz</button>
+</div>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Quiz Title</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let quiz of (quizzes | async)">
+      <td>{{quiz.quizId}}</td>
+      <td>{{quiz.quizTitle}}</td>
+      <!-- <td>
+          <button class="btn btn-info" (click)="onEditAddress(address)" data-bs-toggle="modal" data-bs-target="#addAddressModal">Edit</button>
+          <button class="btn btn-danger" (click)="deleteAddress(address)">Delete</button>
+      </td>-->
+      <td>
+        <a [routerLink]="['/quiz/edit/', quiz.quizId]" class="btn btn-primary btn-sm">Edit</a>
+        <a [routerLink]="" (click)="delete(quiz.quizId)" class="btn btn-danger btn-sm ml-1">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
