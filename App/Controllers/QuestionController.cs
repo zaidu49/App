@@ -35,10 +35,17 @@ namespace App.Controllers
         //{
         //    return await _context.Tests.ToListAsync();
         //}
-        [HttpGet]
-        public IEnumerable<Question> GetQuestions()
+        //[HttpGet()]
+        //public IEnumerable<Question> GetQuestions()
+        //{
+        //    return _context.Questions.OrderByDescending(q => q.QuestionId);
+        //}
+
+        [HttpGet("getByQuizId/{quizId}")]
+        public IEnumerable<Question> GetQuestions([FromRoute] int quizId)
         {
-            return _context.Questions.OrderByDescending(q => q.QuestionId);
+            return _context.Questions.Where(q => q.QuizId == quizId)
+                .OrderByDescending(q => q.QuestionId);
         }
 
         // GET: api/Test/5
@@ -120,6 +127,7 @@ namespace App.Controllers
                 return BadRequest();
             }
 
+
             _context.Entry(question).State = EntityState.Modified;
 
             try
@@ -151,14 +159,19 @@ namespace App.Controllers
 
         //    return CreatedAtAction("GetTest", new { id = test.TestId }, test);
         //}
-        [HttpPost]
-        public async Task<IActionResult> PostQuestion([FromBody] Question question)
+        [HttpPost("{quizId}")]
+        public async Task<IActionResult> PostQuestion([FromRoute] int quizId, [FromBody] Question question)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+           var quiz = _context.Quizzes.SingleOrDefault(q => q.QuizId == quizId);
+            if (quiz == null)
+                return NotFound();
+
+            question.QuizId = quizId;
             _repo.Add(question);
             var save = await _repo.SaveAsync(question);
 

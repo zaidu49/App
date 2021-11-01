@@ -19,6 +19,7 @@
       </td>-->
       <td>
         <a [routerLink]="['/quiz/edit/', quiz.quizId]" class="btn btn-primary btn-sm">Edit</a>
+        <a [routerLink]="['/question-list/', quiz.quizId]" class="btn btn-primary btn-sm">Edit Questions</a>
         <a [routerLink]="" (click)="delete(quiz.quizId)" class="btn btn-danger btn-sm ml-1">Delete</a>
       </td>
     </tr>

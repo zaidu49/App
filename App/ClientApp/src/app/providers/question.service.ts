@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Question } from '../models/question';
+import { Quiz } from '../models/quiz';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class QuestionService {
     this.myApiUrl = 'api/Question/';
   }
 
-  getAllQuestions(): Observable<Question[]> {
-    return this.http.get<Question[]>(this.myAppUrl + this.myApiUrl)
+  getAllQuestions(quizId: number): Observable<Question[]> {
+    return this.http.get<Question[]>(this.myAppUrl + this.myApiUrl + "getByQuizId/" + quizId)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
@@ -40,8 +41,9 @@ export class QuestionService {
       );
   }
 
-  saveQuestion(question): Observable<Question> {
-    return this.http.post<Question>(this.myAppUrl + this.myApiUrl, JSON.stringify(question), this.httpOptions)
+  saveQuestion(question, quizId: number): Observable<Question> {
+
+    return this.http.post<Question>(this.myAppUrl + this.myApiUrl + quizId, JSON.stringify(question), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.errorHandler)

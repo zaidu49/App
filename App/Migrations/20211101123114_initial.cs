@@ -2,7 +2,7 @@
 
 namespace App.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,8 @@ namespace App.Migrations
                     CorrectAnswer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Answer1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Answer2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Answer3 = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Answer3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuizId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,11 +54,20 @@ namespace App.Migrations
 
             migrationBuilder.InsertData(
                 table: "Questions",
-                columns: new[] { "QuestionId", "Answer1", "Answer2", "Answer3", "CorrectAnswer", "QuestionText" },
+                columns: new[] { "QuestionId", "Answer1", "Answer2", "Answer3", "CorrectAnswer", "QuestionText", "QuizId" },
                 values: new object[,]
                 {
-                    { 1, "answer 1", "answer 2", "answer 3", "Correct answer", "question1" },
-                    { 2, "answer 1", "answer 2", "answer 3", "Correct answer", "question2" }
+                    { 1, "answer 1", "answer 2", "answer 3", "Correct answer", "question1", 1 },
+                    { 2, "answer 1", "answer 2", "answer 3", "Correct answer", "question2", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Quizzes",
+                columns: new[] { "QuizId", "QuizTitle" },
+                values: new object[,]
+                {
+                    { 1, "quiz1" },
+                    { 2, "quiz2" }
                 });
 
             migrationBuilder.InsertData(

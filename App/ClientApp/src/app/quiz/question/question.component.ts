@@ -21,6 +21,7 @@ export class QuestionComponent implements OnInit {
   submitted = false;
   actionType: string;
   existingQuestion: Question;
+  quizId
 
   constructor(private _fb: FormBuilder, private avRoute: ActivatedRoute, private router: Router, private questionService: QuestionService)
   {
@@ -36,6 +37,7 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.quizId = this.avRoute.snapshot.paramMap.get('quizId');
 
     if (this.questionId > 0) {
       this.actionType = 'Edit';
@@ -78,13 +80,14 @@ export class QuestionComponent implements OnInit {
     }
     if (this.actionType === 'Add')
     {
-      this.questionService.saveQuestion(this.questionForm.value)
+      this.question.quizId = this.quizId;
+      this.questionService.saveQuestion(this.questionForm.value, this.question.quizId)
         .pipe(first())
         .subscribe({
           next: () => {
             alert('Question added');
             //this.loading = false;
-            this.router.navigate(['/question-list']);
+            this.router.navigate(['/question-list', this.question.quizId]);
           },
           error: (error: any) => {
             alert("Error!!!!");
@@ -94,11 +97,11 @@ export class QuestionComponent implements OnInit {
     }
 
     if (this.actionType === 'Edit') {
-
+      this.question.quizId = this.existingQuestion.quizId;
       this.question.questionId = this.existingQuestion.questionId;
       this.questionService.updateQuestion(this.questionId, this.question)
         .subscribe((data) => {
-          this.router.navigate(['/question-list']);
+          this.router.navigate(['/question-list', this.question.quizId]);
           //this.router.navigate([this.router.url]);
         });
     }

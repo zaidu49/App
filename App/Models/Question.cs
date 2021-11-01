@@ -21,6 +21,7 @@ namespace App.Models
 		public string Answer2 { get; set; }
 		[Required]
 		public string Answer3 { get; set; }
+        public int QuizId { get; set; }
 
-	}
+    }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../providers/question.service';
@@ -12,16 +12,18 @@ import { QuestionService } from '../../providers/question.service';
 export class QuestionListComponent implements OnInit {
 
   questionData: Observable<Question[]>;
+  quizId
 
-  constructor(private questionService: QuestionService, private router: Router) { }
+  constructor(private questionService: QuestionService, private router: Router, private avRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.quizId = this.avRoute.snapshot.paramMap.get('quizId');
     this.getAllQuestions();
   }
 
 
   getAllQuestions() {
-    this.questionData = this.questionService.getAllQuestions();
+    this.questionData = this.questionService.getAllQuestions(this.quizId);
       //.subscribe(res => {
       //  this.questions = res;
       //})
@@ -36,6 +38,7 @@ export class QuestionListComponent implements OnInit {
 
   }
   clickAddQuestion() {
-    this.router.navigate(['/question']);
+    console.log("adding" + this.quizId);
+    this.router.navigate(['/question',this.quizId]);
   }
 }

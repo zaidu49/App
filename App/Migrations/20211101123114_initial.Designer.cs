@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20210725162537_Initial")]
-    partial class Initial
+    [Migration("20211101123114_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,9 @@ namespace App.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
                     b.HasKey("QuestionId");
 
                     b.ToTable("Questions");
@@ -59,7 +62,8 @@ namespace App.Migrations
                             Answer2 = "answer 2",
                             Answer3 = "answer 3",
                             CorrectAnswer = "Correct answer",
-                            QuestionText = "question1"
+                            QuestionText = "question1",
+                            QuizId = 1
                         },
                         new
                         {
@@ -68,7 +72,8 @@ namespace App.Migrations
                             Answer2 = "answer 2",
                             Answer3 = "answer 3",
                             CorrectAnswer = "Correct answer",
-                            QuestionText = "question2"
+                            QuestionText = "question2",
+                            QuizId = 2
                         });
                 });
 
@@ -86,6 +91,18 @@ namespace App.Migrations
                     b.HasKey("QuizId");
 
                     b.ToTable("Quizzes");
+
+                    b.HasData(
+                        new
+                        {
+                            QuizId = 1,
+                            QuizTitle = "quiz1"
+                        },
+                        new
+                        {
+                            QuizId = 2,
+                            QuizTitle = "quiz2"
+                        });
                 });
 
             modelBuilder.Entity("App.Models.Test", b =>

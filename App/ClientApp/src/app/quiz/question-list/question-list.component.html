@@ -27,7 +27,8 @@
 
   </td>-->
       <td>
-        <a [routerLink]="['/question/edit/', question.questionId]" class="btn btn-primary btn-sm">Edit</a>
+        <a [routerLink]="['/question/edit/', question.questionId, question.quizId]" class="btn btn-primary btn-sm">Edit</a>
+        <!--<a [routerLink]="['/question/edit/', question.questionId]" class="btn btn-primary btn-sm">Edit</a>-->
         <a [routerLink]="" (click)="delete(question.questionId)" class="btn btn-danger btn-sm ml-1">Delete</a>
       </td>
     </tr>

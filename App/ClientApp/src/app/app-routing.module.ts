@@ -21,8 +21,16 @@ const routes: Routes = [
   { path: 'add', component: AddEditTestComponent },
   { path: 'test/edit/:id', component: AddEditTestComponent },
   { path: 'question', component: QuestionComponent },
+  { path: 'question/:quizId', component: QuestionComponent },
+
   { path: 'question/edit/:id', component: QuestionComponent },
-  { path: 'question-list', component: QuestionListComponent },
+  { path: 'question/edit/:id/:quizId', component: QuestionComponent },
+
+
+ { path: 'question-list', component: QuestionListComponent },
+
+  { path: 'question-list/:quizId', component: QuestionListComponent },
+
   { path: 'add-edit-quiz', component: AddEditQuizComponent },
   { path: 'quiz/edit/:id', component: AddEditQuizComponent },
   { path: 'quiz-list', component: QuizListComponent },
