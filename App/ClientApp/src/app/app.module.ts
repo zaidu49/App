@@ -21,6 +21,9 @@ import { QuestionListComponent } from './quiz/question-list/question-list.compon
 import { AddEditQuizComponent } from './quiz/add-edit-quiz/add-edit-quiz.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizService } from './providers/quiz.service';
+import { RegisterComponent } from './account/register/register.component';
+import { AccountService } from './providers/accountService';
+import { LoginComponent } from './account/login/login.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { QuizService } from './providers/quiz.service';
     QuestionComponent,
     QuestionListComponent,
     AddEditQuizComponent,
-    QuizListComponent
+    QuizListComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -51,7 +56,8 @@ import { QuizService } from './providers/quiz.service';
   providers: [
     TestService,
     QuestionService,
-    QuizService
+    QuizService,
+    AccountService
   ],
   bootstrap: [AppComponent]
 })
