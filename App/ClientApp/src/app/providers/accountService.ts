@@ -37,6 +37,11 @@ export class AccountService {
       );
   }
 
+  getuserprofile() {
+    var tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer' + localStorage.getItem('token') });
+    return this.http.get(this.myAppUrl + 'api/UserProfile', { headers: tokenHeader });
+  }
+
   //getAllQuizzes(): Observable<Quiz[]> {
   //  return this.http.get<Quiz[]>(this.myAppUrl + this.myApiUrl)
   //    .pipe(

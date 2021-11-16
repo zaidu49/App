@@ -1,5 +1,6 @@
 ﻿using App.Data;
 using App.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,7 @@ namespace App.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IEnumerable<Quiz> GetQuizzes()
         {
             return _context.Quizzes.OrderByDescending(q => q.QuizId);
@@ -93,7 +95,7 @@ namespace App.Controllers
             return NoContent();
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostQuiz([FromBody] Quiz quiz)
         {

@@ -28,6 +28,17 @@ namespace App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //might not need this
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("EnableCORS", builder =>
+            //    {
+            //        builder.AllowAnyOrigin()
+            //        .AllowAnyHeader()
+            //        .AllowAnyMethod();
+            //    });
+            //});
             services.AddControllersWithViews();
 
             services.AddDbContext<AppDataContext>(options =>
@@ -35,27 +46,66 @@ namespace App
             services.AddDbContext<UserDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AppDataContext")));
 
+            //n token validation parameters
+            var tokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = "http://localhost:34467",
+                //Configuration["JWT:Issuer"],
+                ValidAudience = "http://localhost:34467",
+                //Configuration["JWT:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"])),
+
+                //ClockSkew = TimeSpan.Zero
+            };
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UserDbContext>().AddDefaultTokenProviders();
 
-            var secretKey = Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"].ToString());
+
+            //n Add authentication
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(configure =>
-           {
-               configure.RequireHttpsMetadata = false;
-               configure.SaveToken = false;
-               configure.TokenValidationParameters = new TokenValidationParameters
-               {
-                   ValidateIssuerSigningKey = true,
-                   IssuerSigningKey = new SymmetricSecurityKey(secretKey),
-                   ValidateIssuer = false,
-                   ValidateAudience = false,
-                   ClockSkew = TimeSpan.Zero
-               };
-           });
+                //options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                //Add JWT Bearer
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = tokenValidationParameters;
+                });
+
+            //old add auth with token valid parameters
+            // var secretKey = Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"].ToString());
+            // services.AddAuthentication(options =>
+            // {
+            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            // }).AddJwtBearer(configure =>
+            //{
+            //    configure.RequireHttpsMetadata = false;
+            //    configure.SaveToken = false;
+            //    configure.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+            //        //ValidateIssuer = false,
+            //        ValidIssuer = Configuration["JWT:Issuer"],
+            //        ValidateAudience = true,
+            //        //ValidateAudience = false,
+            //        ValidAudience = Configuration["JWT:Audience"],
+            //        ClockSkew = TimeSpan.Zero
+            //    };
+            //});
+
+            
 
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
 
@@ -69,6 +119,15 @@ namespace App
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.Use(async (ctx, next) =>
+            //{
+            //    await next();
+            //    if (ctx.Response.StatusCode == 204)
+            //    {
+            //        ctx.Response.ContentLength = 0;
+            //    }
+            //});
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -88,6 +147,9 @@ namespace App
             }
 
             app.UseRouting();
+
+            //might not need this
+            //app.UseCors("EnableCORS");
 
             app.UseAuthentication();
             app.UseAuthorization();
