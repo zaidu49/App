@@ -1,18 +1,12 @@
 using App.Data;
-using App.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Text;
 
 namespace App
 {
@@ -29,34 +23,8 @@ namespace App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
             services.AddDbContext<AppDataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("AppDataContext")));
-            services.AddDbContext<UserDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("AppDataContext")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<UserDbContext>().AddDefaultTokenProviders();
-
-            var secretKey = Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"].ToString());
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(configure =>
-           {
-               configure.RequireHttpsMetadata = false;
-               configure.SaveToken = false;
-               configure.TokenValidationParameters = new TokenValidationParameters
-               {
-                   ValidateIssuerSigningKey = true,
-                   IssuerSigningKey = new SymmetricSecurityKey(secretKey),
-                   ValidateIssuer = false,
-                   ValidateAudience = false,
-                   ClockSkew = TimeSpan.Zero
-               };
-           });
-
             services.AddScoped(typeof(IDataRepository<>), typeof(DataRepository<>));
 
             // In production, the Angular files will be served from this directory
@@ -88,9 +56,6 @@ namespace App
             }
 
             app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
