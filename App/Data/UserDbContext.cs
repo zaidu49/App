@@ -16,7 +16,6 @@ namespace App.Data
         {
         }
 
-        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

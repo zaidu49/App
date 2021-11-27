@@ -11,8 +11,7 @@ import { QuizService } from '../../providers/quiz.service';
 })
 export class QuizListComponent implements OnInit {
 
-  //quizzes: Observable<Quiz[]>;
-  quizzes: any;
+  quizzes: Observable<Quiz[]>;
 
   constructor(private quizService: QuizService, private router: Router) { }
 
@@ -20,14 +19,14 @@ export class QuizListComponent implements OnInit {
     this.getAllQuizzes();
   }
 
-  //getAllQuizzes() {
-  //  this.quizzes = this.quizService.getAllQuizzes();
-  //}
   getAllQuizzes() {
-    this.quizService.getAllQuizzes().subscribe(res => {
-      this.quizzes = res;
-    })
+    this.quizzes = this.quizService.getAllQuizzes();
   }
+  //getAllQuizzes() {
+  //  this.quizService.getAllQuizzes().subscribe(res => {
+  //    this.quizzes = res;
+  //  })
+  //}
 
 
   delete(quizId) {

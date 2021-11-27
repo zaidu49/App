@@ -32,8 +32,7 @@ export class QuizService {
   }
 
   getQuiz(quizId: number): Observable<Quiz> {
-    var tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer' + localStorage.getItem('token') });
-    return this.http.get<Quiz>(this.myAppUrl + this.myApiUrl + quizId, { headers: tokenHeader })
+    return this.http.get<Quiz>(this.myAppUrl + this.myApiUrl + quizId)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
