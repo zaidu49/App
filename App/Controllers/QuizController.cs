@@ -1,5 +1,6 @@
 ﻿using App.Data;
 using App.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -95,6 +96,7 @@ namespace App.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> PostQuiz([FromBody] Quiz quiz)
         {
             if (!ModelState.IsValid)

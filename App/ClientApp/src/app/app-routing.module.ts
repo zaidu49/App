@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './account/login/login.component';
+import { RegisterComponent } from './account/register/register.component';
 import { AddEditTestComponent } from './add-edit-test/add-edit-test.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
@@ -34,6 +36,9 @@ const routes: Routes = [
   { path: 'add-edit-quiz', component: AddEditQuizComponent },
   { path: 'quiz/edit/:id', component: AddEditQuizComponent },
   { path: 'quiz-list', component: QuizListComponent },
+
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

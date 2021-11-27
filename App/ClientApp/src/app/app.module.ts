@@ -21,6 +21,10 @@ import { QuestionListComponent } from './quiz/question-list/question-list.compon
 import { AddEditQuizComponent } from './quiz/add-edit-quiz/add-edit-quiz.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
 import { QuizService } from './providers/quiz.service';
+import { RegisterComponent } from './account/register/register.component';
+import { LoginComponent } from './account/login/login.component';
+import { AccountService } from './providers/account.service';
+import { AuthInterceptor } from './providers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { QuizService } from './providers/quiz.service';
     QuestionComponent,
     QuestionListComponent,
     AddEditQuizComponent,
-    QuizListComponent
+    QuizListComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -51,7 +57,13 @@ import { QuizService } from './providers/quiz.service';
   providers: [
     TestService,
     QuestionService,
-    QuizService
+    QuizService,
+    AccountService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
