@@ -34,15 +34,15 @@ namespace App.Data
                 new Test { TestId = 3,  Title = "z2", Body = "Male", Creator = "IT" }
                 );
 
-            modelBuilder.Entity<Quiz>().HasData(
-                new Quiz { QuizId = 1, QuizTitle = "quiz1" },
-                new Quiz { QuizId = 2, QuizTitle = "quiz2" }
-                );
+            //modelBuilder.Entity<Quiz>().HasData(
+            //    new Quiz { QuizId = 1, QuizTitle = "quiz1" },
+            //    new Quiz { QuizId = 2, QuizTitle = "quiz2" }
+            //    );
 
-            modelBuilder.Entity<Question>().HasData(
-                new Question { QuestionId = 1, QuestionText = "question1", CorrectAnswer = "Correct answer", Answer1 = "answer 1", Answer2 = "answer 2", Answer3 = "answer 3", QuizId=1 },
-                new Question { QuestionId = 2, QuestionText = "question2", CorrectAnswer = "Correct answer", Answer1 = "answer 1", Answer2 = "answer 2", Answer3 = "answer 3", QuizId=2 }
-                );
+            //modelBuilder.Entity<Question>().HasData(
+            //    new Question { QuestionId = 1, QuestionText = "question1", CorrectAnswer = "Correct answer", Answer1 = "answer 1", Answer2 = "answer 2", Answer3 = "answer 3", QuizId=1 },
+            //    new Question { QuestionId = 2, QuestionText = "question2", CorrectAnswer = "Correct answer", Answer1 = "answer 1", Answer2 = "answer 2", Answer3 = "answer 3", QuizId=2 }
+            //    );
         }
 
     }

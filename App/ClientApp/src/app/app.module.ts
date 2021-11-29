@@ -25,6 +25,7 @@ import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';
 import { AccountService } from './providers/account.service';
 import { AuthInterceptor } from './providers/auth.interceptor';
+import { TestQuizListComponent } from './quiz/test-quiz-list/test-quiz-list.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AuthInterceptor } from './providers/auth.interceptor';
     AddEditQuizComponent,
     QuizListComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    TestQuizListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -55,10 +57,11 @@ import { AuthInterceptor } from './providers/auth.interceptor';
     //])
   ],
   providers: [
+    //AccountService,
     TestService,
     QuestionService,
     QuizService,
-    AccountService,
+    
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

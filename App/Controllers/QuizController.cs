@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 
@@ -34,6 +35,18 @@ namespace App.Controllers
         public IEnumerable<Quiz> GetQuizzes()
         {
             return _context.Quizzes.OrderByDescending(q => q.QuizId);
+        }
+
+        [HttpGet("quizzesByUser")]
+        [Authorize]
+        public IEnumerable<Quiz> GetQuizzesbyUser()
+        {
+            var userClaims = HttpContext.User.Claims.ToList();
+
+            //var uId = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+            //       .Select(c => c.Value).SingleOrDefault();
+            var userId = userClaims[1].Value;
+            return _context.Quizzes.Where(q => q.OwnerId == userId);
         }
 
 
@@ -104,11 +117,34 @@ namespace App.Controllers
                 return BadRequest(ModelState);
             }
 
+            var userClaims = HttpContext.User.Claims.ToList();
+
+            //var userId = userClaims?.FirstOrDefault(x => x.Type.Equals("NameIdentifier", StringComparison.OrdinalIgnoreCase))?.Value;
+            var uId = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                   .Select(c => c.Value).SingleOrDefault();
+            var userId = userClaims[1].Value;
+
+            quiz.OwnerId = userId;
             _repo.Add(quiz);
             var save = await _repo.SaveAsync(quiz);
 
             return CreatedAtAction("Get Quiz", new { id = quiz.QuizId }, quiz);
         }
+
+        //[HttpPost]
+        //[Authorize]
+        //public async Task<IActionResult> PostQuiz([FromBody] Quiz quiz)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    _repo.Add(quiz);
+        //    var save = await _repo.SaveAsync(quiz);
+
+        //    return CreatedAtAction("Get Quiz", new { id = quiz.QuizId }, quiz);
+        //}
 
 
         [HttpDelete("{id}")]

@@ -31,6 +31,14 @@ export class QuizService {
       );
   }
 
+  getQuizzesByUser(): Observable<Quiz[]> {
+    return this.http.get<Quiz[]>(this.myAppUrl + this.myApiUrl + 'quizzesByUser')
+      .pipe(
+        retry(1),
+        catchError(this.errorHandler)
+      );
+  }
+
   getQuiz(quizId: number): Observable<Quiz> {
     return this.http.get<Quiz>(this.myAppUrl + this.myApiUrl + quizId)
       .pipe(

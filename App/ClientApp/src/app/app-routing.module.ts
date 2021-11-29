@@ -11,6 +11,7 @@ import { AddEditQuizComponent } from './quiz/add-edit-quiz/add-edit-quiz.compone
 import { QuestionListComponent } from './quiz/question-list/question-list.component';
 import { QuestionComponent } from './quiz/question/question.component';
 import { QuizListComponent } from './quiz/quiz-list/quiz-list.component';
+import { TestQuizListComponent } from './quiz/test-quiz-list/test-quiz-list.component';
 import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
@@ -36,7 +37,9 @@ const routes: Routes = [
   { path: 'add-edit-quiz', component: AddEditQuizComponent },
   { path: 'quiz/edit/:id', component: AddEditQuizComponent },
   { path: 'quiz-list', component: QuizListComponent },
+  { path: 'quizzesByUser', component: TestQuizListComponent },
 
+  
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
 ];

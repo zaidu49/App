@@ -14,6 +14,7 @@ namespace App.Models
 		[Required]
 		public string QuizTitle { get; set; }
 
+        public string OwnerId { get; set; }
 
-	}
+    }
 }
