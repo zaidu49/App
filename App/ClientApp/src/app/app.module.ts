@@ -57,7 +57,7 @@ import { TestQuizListComponent } from './quiz/test-quiz-list/test-quiz-list.comp
     //])
   ],
   providers: [
-    //AccountService,
+    AccountService,
     TestService,
     QuestionService,
     QuizService,
